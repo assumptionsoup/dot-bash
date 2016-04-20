@@ -1,0 +1,25 @@
+_i()
+{
+    local cur
+    COMREPLY=()
+    cur="${COMP_WORDS[COMP_CWORD]}"
+
+    COMPREPLY=( $(compgen -c -- ${cur}) )
+}
+complete -F _i i
+
+_wd()
+{
+    local cur
+    COMREPLY=()
+    cur="${COMP_WORDS[COMP_CWORD]}"
+    COMPREPLY=( $(compgen -W "`ls  $WORK_REPOS_DIR/*/.git -d |  sed -e 's@.*/.*/\([a-zA-Z0-9]*\)\(.git\)\?/.git@\1@'`" -- ${cur}) )
+}
+complete -F _wd wd
+# complete -F _wd pythonpath
+
+
+# FIXME: this is bad and global.  Should try to figure out a way to localize
+COMP_WORDBREAKS=${COMP_WORDBREAKS//:} # remove ":" from completion delimiters
+
+

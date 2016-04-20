@@ -11,8 +11,21 @@ if [ -f ~/.profile ]; then
 fi
 
 if [ -f ~/.bashrc ]; then
-    source ~/.bashrc
+    # Hack so I don't get my PATH extensions from .bashrc
+    # baked into my environment...
+    PARENT=`ps -ef|grep $$|head -n 1`
+    if [[ "$PARENT" != *"-/bin/bash -c gnome-session"* ]]; then
+        . ~/.bashrc
+    fi
 fi
 
+# User specific environment and startup programs
+# Locale
+export TZ='America/Los_Angeles'
+
+# xmodmap -e "remove Lock = Caps_Lock"
+# xmodmap -e "remove Control = Control_L"
+# xmodmap -e "keysym Caps_Lock = Control_L"
+# xmodmap -e "add Lock = Caps_Lock"
+# xmodmap -e "add Control = Control_L"
 ##############################################################################
-# vim: ft=sh
