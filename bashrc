@@ -150,6 +150,7 @@ export PYTHONPATH=:$PYTHONPATH:$HOME/python
 
 # MAYA
 export MAYA_SET_PARENT_HINT=1
+export MAYA_DISABLE_CIP=1
 
 # OUROBOROS
 export PATH=$HOME/work/ouroboros/bin:$PATH
